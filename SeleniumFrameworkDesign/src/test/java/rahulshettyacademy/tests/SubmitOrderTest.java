@@ -15,14 +15,12 @@ import rahulshettyacademy.pageobjects.ConfirmationPage;
 import rahulshettyacademy.pageobjects.OrderPage;
 import rahulshettyacademy.pageobjects.ProductCatalogue;
 
-public class SubmitOrderTest extends BaseTest{
+public class SubmitOrderTest extends BaseTest {
 	String productName = "ZARA COAT 3";
 
-	@Test(dataProvider="getData",groups= {"Purchase"})
-	public void submitOrder(HashMap<String,String> input) throws IOException, InterruptedException
-	{
+	@Test(dataProvider = "getData", groups = { "Purchase" })
+	public void submitOrder(HashMap<String, String> input) throws IOException, InterruptedException {
 
-		
 		ProductCatalogue productCatalogue = landingPage.loginApplication(input.get("email"), input.get("password"));
 		List<WebElement> products = productCatalogue.getProductList();
 		productCatalogue.addProductToCart(input.get("product"));
@@ -35,38 +33,29 @@ public class SubmitOrderTest extends BaseTest{
 		ConfirmationPage confirmationPage = checkoutPage.submitOrder();
 		String confirmMessage = confirmationPage.getConfirmationMessage();
 		Assert.assertTrue(confirmMessage.equalsIgnoreCase("THANKYOU FOR THE ORDER."));
-		
 
 	}
-	
-	@Test(dependsOnMethods= {"submitOrder"})
-	public void OrderHistoryTest()
-	{
-		//"ZARA COAT 3";
-		ProductCatalogue productCatalogue = landingPage.loginApplication("basakhrishi@gmail.com", "Testing@123");
+
+	@Test(dataProvider = "getData", dependsOnMethods = { "submitOrder" })
+	public void OrderHistoryTest(HashMap<String, String> input) {
+		// "ZARA COAT 3";
+		ProductCatalogue productCatalogue = landingPage.loginApplication(input.get("email"), input.get("password"));
 		OrderPage ordersPage = productCatalogue.goToOrdersPage();
-		Assert.assertTrue(ordersPage.VerifyOrderDisplay(productName));
-		
-}
-	
+		Assert.assertTrue(ordersPage.VerifyOrderDisplay(input.get("product")));
 
-	
-	//Extent Reports - 
-	
-	
-	@DataProvider
-	public Object[][] getData() throws IOException
-	{
-
-		
-		List<HashMap<String,String>> data = getJsonDataToMap(System.getProperty("user.dir")+"//src//test//java//rahulshettyacademy//data//PurchaseOrder.json");
-		return new Object[][]  {{data.get(0)}, {data.get(1) } };
-		
 	}
-	
-	
-	
-	
+
+	// Extent Reports -
+
+	@DataProvider
+	public Object[][] getData() throws IOException {
+
+		List<HashMap<String, String>> data = getJsonDataToMap(
+				System.getProperty("user.dir") + "//src//test//java//rahulshettyacademy//data//PurchaseOrder.json");
+		return new Object[][] { { data.get(0) }, { data.get(1) } };
+
+	}
+
 //	 @DataProvider
 //	  public Object[][] getData()
 //	  {
@@ -82,15 +71,5 @@ public class SubmitOrderTest extends BaseTest{
 //	map1.put("email", "shetty@gmail.com");
 //	map1.put("password", "Iamking@000");
 //	map1.put("product", "ADIDAS ORIGINAL");
-	  
-	
-	
-	
-	
-	
-	
-	
-	
-
 
 }
