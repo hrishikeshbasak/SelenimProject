@@ -29,6 +29,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import rahulshettyacademy.pageobjects.LandingPage;
+import rahulshettyacademy.resources.ExtentReporterNG;
 
 public class BaseTest {
 
@@ -36,10 +37,24 @@ public class BaseTest {
 	public LandingPage landingPage;
 	protected final Logger log = LogManager.getLogger(this.getClass());
 
+	protected void logInfo(String message) {
+		log.info(message);
+		if (ExtentReporterNG.getTest() != null) {
+			ExtentReporterNG.getTest().info(message);
+		}
+	}
+
+	protected void logWarn(String message) {
+		log.warn(message);
+		if (ExtentReporterNG.getTest() != null) {
+			ExtentReporterNG.getTest().warning(message);
+		}
+	}
+
 	public WebDriver initializeDriver() throws IOException
 
 	{
-		log.info("Initializing WebDriver configuration...");
+		logInfo("Initializing WebDriver configuration...");
 		Properties prop = new Properties();
 		FileInputStream fis = new FileInputStream(System.getProperty("user.dir")
 				+ "//src//main//java//rahulshettyacademy//resources//GlobalData.properties");
@@ -48,10 +63,10 @@ public class BaseTest {
 		String browserName = System.getProperty("browser") != null ? System.getProperty("browser")
 				: prop.getProperty("browser");
 		browserName = browserName.toLowerCase();
-		log.info("Browser selected: " + browserName);
+		logInfo("Browser selected: " + browserName);
 
 		if (browserName.contains("chrome")) {
-			log.info("Setting up ChromeDriver with options");
+			logInfo("Setting up ChromeDriver with options");
 			ChromeOptions options = new ChromeOptions();
 			WebDriverManager.chromedriver().setup();
 			options.addArguments("--remote-allow-origins=*");
@@ -64,17 +79,17 @@ public class BaseTest {
 			options.addArguments("--user-data-dir=" + System.getProperty("java.io.tmpdir") + File.separator
 					+ "chrome-profile-" + UUID.randomUUID());
 			if (browserName.contains("headless")) {
-				log.info("Running ChromeDriver in headless mode");
+				logInfo("Running ChromeDriver in headless mode");
 				options.addArguments("--headless=new");
 			}
 			driver = new ChromeDriver(options);
 
 		} else if (browserName.equalsIgnoreCase("firefox")) {
-			log.info("Setting up FirefoxDriver");
+			logInfo("Setting up FirefoxDriver");
 			WebDriverManager.firefoxdriver().setup();
 			driver = new FirefoxDriver();
 		} else if (browserName.equalsIgnoreCase("edge")) {
-			log.info("Setting up EdgeDriver");
+			logInfo("Setting up EdgeDriver");
 			WebDriverManager.edgedriver().setup();
 			driver = new EdgeDriver();
 		}
@@ -82,40 +97,40 @@ public class BaseTest {
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 		if (!browserName.contains("headless")) {
 			driver.manage().window().maximize();
-			log.info("Browser window maximized");
+			logInfo("Browser window maximized");
 		}
-		log.info("WebDriver initialization complete.");
+		logInfo("WebDriver initialization complete.");
 		return driver;
 
 	}
 
 	public List<HashMap<String, String>> getJsonDataToMap(String filePath) throws IOException {
-		log.info("Reading JSON data from file: " + filePath);
+		logInfo("Reading JSON data from file: " + filePath);
 		String jsonContent = FileUtils.readFileToString(new File(filePath), StandardCharsets.UTF_8);
 
 		ObjectMapper mapper = new ObjectMapper();
 		List<HashMap<String, String>> data = mapper.readValue(jsonContent,
 				new TypeReference<List<HashMap<String, String>>>() {
 				});
-		log.info("JSON data successfully parsed to Map");
+		logInfo("JSON data successfully parsed to Map");
 		return data;
 
 	}
 
 	public String getScreenshot(String testCaseName, WebDriver driver) throws IOException {
-		log.info("Capturing screenshot for: " + testCaseName);
+		logInfo("Capturing screenshot for: " + testCaseName);
 		TakesScreenshot ts = (TakesScreenshot) driver;
 		File source = ts.getScreenshotAs(OutputType.FILE);
 		File file = new File(System.getProperty("user.dir") + "//reports//" + testCaseName + ".png");
 		FileUtils.copyFile(source, file);
-		log.info("Screenshot captured and saved to: " + file.getAbsolutePath());
+		logInfo("Screenshot captured and saved to: " + file.getAbsolutePath());
 		return System.getProperty("user.dir") + "//reports//" + testCaseName + ".png";
 
 	}
 
 	@BeforeMethod(alwaysRun = true)
 	public LandingPage launchApplication() throws IOException {
-		log.info("Launching the application under test");
+		logInfo("Launching the application under test");
 		driver = initializeDriver();
 		landingPage = new LandingPage(driver);
 		landingPage.goTo();
@@ -126,7 +141,7 @@ public class BaseTest {
 	@AfterMethod(alwaysRun = true)
 	public void tearDown() {
 		if (driver != null) {
-			log.info("Quitting WebDriver instance");
+			logInfo("Quitting WebDriver instance");
 			driver.quit();
 		}
 	}

@@ -33,17 +33,17 @@ public class CheckoutPage extends AbstractComponent {
 	private By results = By.cssSelector(".ta-results");
 
 	public void selectCountry(String countryName) {
-		log.info("Selecting country: " + countryName);
+		logInfo("Selecting country: " + countryName);
 		Actions a = new Actions(driver);
 		a.sendKeys(country, countryName).build().perform();
 		waitForElementToAppear(By.cssSelector(".ta-results"));
 		selectCountry.click();
-		log.info("Country selected: " + countryName);
+		logInfo("Country selected: " + countryName);
 	}
 	
 	public ConfirmationPage submitOrder()
 	{
-		log.info("Submitting order");
+		logInfo("Submitting order");
 		submit.click();
 		return new ConfirmationPage(driver);
 		

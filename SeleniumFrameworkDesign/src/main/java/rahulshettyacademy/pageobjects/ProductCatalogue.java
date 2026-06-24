@@ -34,21 +34,21 @@ public class ProductCatalogue extends AbstractComponent {
 	By spinnerBy = By.cssSelector(".ng-animating");
 
 	public List<WebElement> getProductList() {
-		log.info("Fetching products list from the catalogue");
+		logInfo("Fetching products list from the catalogue");
 		waitForElementToAppear(productsBy);
-		log.info("Total products found in catalogue: " + products.size());
+		logInfo("Total products found in catalogue: " + products.size());
 		return products;
 	}
 	
 	public WebElement getProductByName(String productName)
 	{
-		log.info("Searching for product by name: " + productName);
+		logInfo("Searching for product by name: " + productName);
 		WebElement prod =	getProductList().stream().filter(product->
 		product.findElement(By.cssSelector("b")).getText().equals(productName)).findFirst().orElse(null);
 		if (prod != null) {
-			log.info("Product found: " + productName);
+			logInfo("Product found: " + productName);
 		} else {
-			log.warn("Product not found: " + productName);
+			logWarn("Product not found: " + productName);
 		}
 		return prod;
 	}
@@ -56,12 +56,12 @@ public class ProductCatalogue extends AbstractComponent {
 	
 	public void addProductToCart(String productName)
 	{
-		log.info("Adding product to cart: " + productName);
+		logInfo("Adding product to cart: " + productName);
 		WebElement prod = getProductByName(productName);
 		prod.findElement(addToCart).click();
 		waitForElementToAppear(toastMessage);
 		waitForElementToDisappear(spinnerBy);
-		log.info("Product added to cart successfully: " + productName);
+		logInfo("Product added to cart successfully: " + productName);
 	}
 	
 	

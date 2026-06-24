@@ -27,9 +27,9 @@ public class OrderPage extends AbstractComponent {
 	}
 
 	public Boolean VerifyOrderDisplay(String productName) {
-		log.info("Verifying order display for product: " + productName);
+		logInfo("Verifying order display for product: " + productName);
 		Boolean match = productNames.stream().anyMatch(product -> product.getText().equalsIgnoreCase(productName));
-		log.info("Order display verification result: " + match);
+		logInfo("Order display verification result: " + match);
 		return match;
 
 	}

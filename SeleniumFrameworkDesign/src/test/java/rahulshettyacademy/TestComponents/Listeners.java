@@ -16,7 +16,21 @@ import rahulshettyacademy.resources.ExtentReporterNG;
 public class Listeners extends BaseTest implements ITestListener{
 	ExtentTest test;
 	ExtentReports extent = ExtentReporterNG.getReportObject();
-	ThreadLocal<ExtentTest> extentTest = new ThreadLocal<ExtentTest>(); //Thread safe
+	public static ThreadLocal<ExtentTest> extentTest = new ThreadLocal<ExtentTest>() {
+		@Override
+		public ExtentTest get() {
+			return ExtentReporterNG.getTest();
+		}
+		@Override
+		public void set(ExtentTest value) {
+			ExtentReporterNG.setTest(value);
+		}
+		@Override
+		public void remove() {
+			ExtentReporterNG.removeTest();
+		}
+	};
+
 	@Override
 	public void onTestStart(ITestResult result) {
 		log.info("=========================================================================");
