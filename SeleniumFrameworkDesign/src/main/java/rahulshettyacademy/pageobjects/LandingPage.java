@@ -34,6 +34,7 @@ public class LandingPage extends AbstractComponent {
 	WebElement errorMessage;
 
 	public ProductCatalogue loginApplication(String email, String password) {
+		log.info("Logging into application with username: " + email);
 		userEmail.sendKeys(email);
 		passwordEle.sendKeys(password);
 		submit.click();
@@ -42,11 +43,15 @@ public class LandingPage extends AbstractComponent {
 	}
 
 	public String getErrorMessage() {
+		log.info("Retrieving login error message");
 		waitForWebElementToAppear(errorMessage);
-		return errorMessage.getText();
+		String errorMsg = errorMessage.getText();
+		log.info("Error message retrieved: " + errorMsg);
+		return errorMsg;
 	}
 
 	public void goTo() {
+		log.info("Navigating to URL: https://rahulshettyacademy.com/client");
 		driver.get("https://rahulshettyacademy.com/client");
 	}
 

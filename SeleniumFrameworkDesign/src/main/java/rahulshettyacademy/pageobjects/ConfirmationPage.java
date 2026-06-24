@@ -25,8 +25,11 @@ public class ConfirmationPage extends AbstractComponent{
 	
 	public String getConfirmationMessage()
 	{
+		log.info("Retrieving order confirmation message");
 		CheckoutPage cp = new CheckoutPage(driver);	
-		return confirmationMessage.getText();
+		String confMessage = confirmationMessage.getText();
+		log.info("Confirmation message displayed: " + confMessage);
+		return confMessage;
 	}
 	
 	

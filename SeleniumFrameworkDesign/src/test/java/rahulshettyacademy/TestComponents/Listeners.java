@@ -19,21 +19,28 @@ public class Listeners extends BaseTest implements ITestListener{
 	ThreadLocal<ExtentTest> extentTest = new ThreadLocal<ExtentTest>(); //Thread safe
 	@Override
 	public void onTestStart(ITestResult result) {
-		// TODO Auto-generated method stub
+		log.info("=========================================================================");
+		log.info("STARTING TEST CASE: " + result.getMethod().getMethodName());
+		log.info("=========================================================================");
 		test = extent.createTest(result.getMethod().getMethodName());
 		extentTest.set(test);//unique thread id(ErrorValidationTest)->test
 	}
 
 	@Override
 	public void onTestSuccess(ITestResult result) {
-		// TODO Auto-generated method stub
+		log.info("=========================================================================");
+		log.info("TEST CASE PASSED: " + result.getMethod().getMethodName());
+		log.info("=========================================================================");
 		extentTest.get().log(Status.PASS, "Test Passed");
 		
 	}
 
 	@Override
 	public void onTestFailure(ITestResult result) {
-		// TODO Auto-generated method stub
+		log.error("=========================================================================");
+		log.error("TEST CASE FAILED: " + result.getMethod().getMethodName());
+		log.error("Exception Message: " + result.getThrowable().getMessage());
+		log.error("=========================================================================");
 		extentTest.get().fail(result.getThrowable());//
 		
 		try {
@@ -41,8 +48,7 @@ public class Listeners extends BaseTest implements ITestListener{
 					.get(result.getInstance());
 			
 		} catch (Exception e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			log.error("Failed to retrieve driver instance dynamically", e1);
 		}
 		
 		
@@ -52,8 +58,7 @@ public class Listeners extends BaseTest implements ITestListener{
 			
 			filePath = getScreenshot(result.getMethod().getMethodName(),driver);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.error("Failed to capture screenshot on test failure", e);
 		}
 		extentTest.get().addScreenCaptureFromPath(filePath, result.getMethod().getMethodName());
 		
@@ -65,8 +70,9 @@ public class Listeners extends BaseTest implements ITestListener{
 
 	@Override
 	public void onTestSkipped(ITestResult result) {
-		// TODO Auto-generated method stub
-		
+		log.warn("=========================================================================");
+		log.warn("TEST CASE SKIPPED: " + result.getMethod().getMethodName());
+		log.warn("=========================================================================");
 	}
 
 	@Override
@@ -77,13 +83,12 @@ public class Listeners extends BaseTest implements ITestListener{
 
 	@Override
 	public void onStart(ITestContext context) {
-		// TODO Auto-generated method stub
-		
+		log.info("======================== TEST SUITE STARTED ========================");
 	}
 
 	@Override
 	public void onFinish(ITestContext context) {
-		// TODO Auto-generated method stub
+		log.info("======================== TEST SUITE FINISHED. Flushing extent report ========================");
 		extent.flush();
 		
 	}

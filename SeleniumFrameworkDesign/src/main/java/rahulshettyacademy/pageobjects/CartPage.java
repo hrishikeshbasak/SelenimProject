@@ -30,14 +30,17 @@ public class CartPage extends AbstractComponent {
 	}
 
 	public Boolean VerifyProductDisplay(String productName) {
+		log.info("Verifying product display in cart for product: " + productName);
 		waitForElementToAppear(cartProductsBy);
 		Boolean match = cartProducts.stream()
 				.anyMatch(product -> product.getText().trim().equalsIgnoreCase(productName));
+		log.info("Product display verification result: " + match);
 		return match;
 
 	}
 
 	public CheckoutPage goToCheckout() {
+		log.info("Navigating to Checkout Page");
 		checkoutEle.click();
 		return new CheckoutPage(driver);
 		
