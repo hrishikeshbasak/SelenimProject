@@ -128,7 +128,6 @@ public class BaseTest {
 
 	}
 
-	@BeforeMethod(alwaysRun = true)
 	public LandingPage launchApplication() throws IOException {
 		logInfo("Launching the application under test");
 		driver = initializeDriver();
@@ -138,11 +137,18 @@ public class BaseTest {
 
 	}
 
+	@BeforeMethod(alwaysRun = true)
+	public LandingPage launchApplication(java.lang.reflect.Method method) throws IOException {
+		ExtentReporterNG.createTest(method.getName());
+		return launchApplication();
+	}
+
 	@AfterMethod(alwaysRun = true)
 	public void tearDown() {
 		if (driver != null) {
 			logInfo("Quitting WebDriver instance");
 			driver.quit();
 		}
+		ExtentReporterNG.removeTest();
 	}
 }

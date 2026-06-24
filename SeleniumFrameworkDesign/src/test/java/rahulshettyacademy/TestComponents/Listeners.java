@@ -15,7 +15,6 @@ import rahulshettyacademy.resources.ExtentReporterNG;
 
 public class Listeners extends BaseTest implements ITestListener{
 	ExtentTest test;
-	ExtentReports extent = ExtentReporterNG.getReportObject();
 	public static ThreadLocal<ExtentTest> extentTest = new ThreadLocal<ExtentTest>() {
 		@Override
 		public ExtentTest get() {
@@ -36,8 +35,11 @@ public class Listeners extends BaseTest implements ITestListener{
 		log.info("=========================================================================");
 		log.info("STARTING TEST CASE: " + result.getMethod().getMethodName());
 		log.info("=========================================================================");
-		test = extent.createTest(result.getMethod().getMethodName());
-		extentTest.set(test);//unique thread id(ErrorValidationTest)->test
+		if (ExtentReporterNG.getTest() == null) {
+			test = ExtentReporterNG.createTest(result.getMethod().getMethodName());
+		} else {
+			test = ExtentReporterNG.getTest();
+		}
 	}
 
 	@Override
@@ -103,12 +105,8 @@ public class Listeners extends BaseTest implements ITestListener{
 	@Override
 	public void onFinish(ITestContext context) {
 		log.info("======================== TEST SUITE FINISHED. Flushing extent report ========================");
-		extent.flush();
+		ExtentReporterNG.getReportObject().flush();
 		
 	}
-	
-	
-	
-	
 
 }
