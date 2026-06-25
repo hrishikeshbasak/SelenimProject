@@ -68,6 +68,7 @@ public class BaseTest {
 		if (browserName.contains("chrome")) {
 			logInfo("Setting up ChromeDriver with options");
 			ChromeOptions options = new ChromeOptions();
+			options.setPageLoadStrategy(org.openqa.selenium.PageLoadStrategy.EAGER);
 			WebDriverManager.chromedriver().setup();
 			options.addArguments("--remote-allow-origins=*");
 			options.addArguments("--disable-dev-shm-usage");
