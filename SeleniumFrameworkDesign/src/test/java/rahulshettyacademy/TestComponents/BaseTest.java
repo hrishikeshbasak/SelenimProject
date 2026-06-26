@@ -69,7 +69,7 @@ public class BaseTest {
 			logInfo("Setting up ChromeDriver with options");
 			ChromeOptions options = new ChromeOptions();
 			options.setPageLoadStrategy(org.openqa.selenium.PageLoadStrategy.EAGER);
-			WebDriverManager.chromedriver().setup();
+			// WebDriverManager.chromedriver().setup();
 			options.addArguments("--remote-allow-origins=*");
 			options.addArguments("--disable-dev-shm-usage");
 			options.addArguments("--no-sandbox");
@@ -85,11 +85,11 @@ public class BaseTest {
 
 		} else if (browserName.equalsIgnoreCase("firefox")) {
 			logInfo("Setting up FirefoxDriver");
-			WebDriverManager.firefoxdriver().setup();
+			// WebDriverManager.firefoxdriver().setup();
 			driver = new FirefoxDriver();
 		} else if (browserName.equalsIgnoreCase("edge")) {
 			logInfo("Setting up EdgeDriver");
-			WebDriverManager.edgedriver().setup();
+			// WebDriverManager.edgedriver().setup();
 			driver = new EdgeDriver();
 		}
 
