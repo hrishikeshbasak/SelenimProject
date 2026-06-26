@@ -71,15 +71,15 @@ public class BaseTest {
 			options.setPageLoadStrategy(org.openqa.selenium.PageLoadStrategy.EAGER);
 			// WebDriverManager.chromedriver().setup();
 			options.addArguments("--remote-allow-origins=*");
-			options.addArguments("--disable-dev-shm-usage");
-			options.addArguments("--no-sandbox");
-			options.addArguments("--disable-gpu");
 			options.addArguments("--window-size=1440,900");
 			options.addArguments("--no-first-run");
 			options.addArguments("--no-default-browser-check");
 			if (browserName.contains("headless")) {
 				logInfo("Running ChromeDriver in headless mode");
 				options.addArguments("--headless=new");
+				options.addArguments("--disable-dev-shm-usage");
+				options.addArguments("--no-sandbox");
+				options.addArguments("--disable-gpu");
 			}
 			driver = new ChromeDriver(options);
 
