@@ -12,14 +12,10 @@ public class LandingPage extends AbstractComponent {
 
 	public LandingPage(WebDriver driver) {
 		super(driver);
-		// initialization
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
 
 	}
-
-	// WebElement userEmails = driver.findElement(By.id("userEmail"));
-	// PageFactory
 
 	@FindBy(id = "userEmail")
 	WebElement userEmail;
@@ -29,6 +25,7 @@ public class LandingPage extends AbstractComponent {
 
 	@FindBy(id = "login")
 	WebElement submit;
+	
 	@FindBy(css = "[class*='flyInOut']")
 	WebElement errorMessage;
 

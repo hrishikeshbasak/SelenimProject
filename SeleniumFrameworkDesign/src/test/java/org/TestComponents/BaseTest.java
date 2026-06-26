@@ -57,7 +57,7 @@ public class BaseTest {
 		logInfo("Initializing WebDriver configuration...");
 		Properties prop = new Properties();
 		FileInputStream fis = new FileInputStream(System.getProperty("user.dir")
-				+ "//src//main//java//rahulshettyacademy//resources//GlobalData.properties");
+				+ "//src//main//java//org//resources//GlobalData.properties");
 		prop.load(fis);
 
 		String browserName = System.getProperty("browser") != null ? System.getProperty("browser")

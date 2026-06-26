@@ -42,8 +42,6 @@ public class CartPage extends AbstractComponent {
 		logInfo("Navigating to Checkout Page");
 		checkoutEle.click();
 		return new CheckoutPage(driver);
-		
-
 	}
 
 }

@@ -9,6 +9,7 @@ import org.TestComponents.Retry;
 import org.openqa.selenium.WebElement;
 import org.pageobjects.CartPage;
 import org.pageobjects.ProductCatalogue;
+import org.pageobjects.SignoutPage;
 import org.testng.Assert;
 
 public class ErrorValidationsTest extends BaseTest {
@@ -29,5 +30,7 @@ public class ErrorValidationsTest extends BaseTest {
 		CartPage cartPage = productCatalogue.goToCartPage();
 		Boolean match = cartPage.VerifyProductDisplay("ZARA COAT 33");
 		Assert.assertFalse(match);
+		SignoutPage signoutPage = cartPage.getSignoutPage();
+		signoutPage.signOut();
 	}
 }

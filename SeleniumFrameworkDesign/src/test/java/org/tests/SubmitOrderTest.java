@@ -13,6 +13,7 @@ import org.pageobjects.CheckoutPage;
 import org.pageobjects.ConfirmationPage;
 import org.pageobjects.OrderPage;
 import org.pageobjects.ProductCatalogue;
+import org.pageobjects.SignoutPage;
 import org.testng.Assert;
 
 public class SubmitOrderTest extends BaseTest {
@@ -33,6 +34,8 @@ public class SubmitOrderTest extends BaseTest {
 		ConfirmationPage confirmationPage = checkoutPage.submitOrder();
 		String confirmMessage = confirmationPage.getConfirmationMessage();
 		Assert.assertTrue(confirmMessage.equalsIgnoreCase("THANKYOU FOR THE ORDER."));
+		SignoutPage signoutPage = confirmationPage.getSignoutPage();
+		signoutPage.signOut();
 
 	}
 
@@ -42,6 +45,8 @@ public class SubmitOrderTest extends BaseTest {
 		ProductCatalogue productCatalogue = landingPage.loginApplication(input.get("email"), input.get("password"));
 		OrderPage ordersPage = productCatalogue.goToOrdersPage();
 		Assert.assertTrue(ordersPage.VerifyOrderDisplay(input.get("product")));
+		SignoutPage signoutPage = ordersPage.getSignoutPage();
+		signoutPage.signOut();
 
 	}
 
@@ -51,7 +56,7 @@ public class SubmitOrderTest extends BaseTest {
 	public Object[][] getData() throws IOException {
 
 		List<HashMap<String, String>> data = getJsonDataToMap(
-				System.getProperty("user.dir") + "//src//test//java//rahulshettyacademy//data//PurchaseOrder.json");
+				System.getProperty("user.dir") + "//src//test//java//org//data//PurchaseOrder.json");
 		return new Object[][] { { data.get(0) }, { data.get(1) } };
 
 	}

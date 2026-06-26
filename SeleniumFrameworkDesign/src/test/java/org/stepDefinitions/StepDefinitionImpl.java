@@ -10,6 +10,7 @@ import org.pageobjects.CheckoutPage;
 import org.pageobjects.ConfirmationPage;
 import org.pageobjects.LandingPage;
 import org.pageobjects.ProductCatalogue;
+import org.pageobjects.SignoutPage;
 import org.testng.Assert;
 
 import io.cucumber.java.en.Given;
@@ -61,6 +62,8 @@ public class StepDefinitionImpl extends BaseTest{
     {
     	String confirmMessage = confirmationPage.getConfirmationMessage();
 		Assert.assertTrue(confirmMessage.equalsIgnoreCase(string));
+		SignoutPage signoutPage = confirmationPage.getSignoutPage();
+		signoutPage.signOut();
 		driver.close();
     }
     
