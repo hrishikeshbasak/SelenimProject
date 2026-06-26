@@ -1,15 +1,15 @@
-package rahulshettyacademy.tests;
+package org.tests;
 
 import org.testng.annotations.Test;
 import java.io.IOException;
 import java.util.List;
 
+import org.TestComponents.BaseTest;
+import org.TestComponents.Retry;
 import org.openqa.selenium.WebElement;
+import org.pageobjects.CartPage;
+import org.pageobjects.ProductCatalogue;
 import org.testng.Assert;
-import rahulshettyacademy.TestComponents.BaseTest;
-import rahulshettyacademy.TestComponents.Retry;
-import rahulshettyacademy.pageobjects.CartPage;
-import rahulshettyacademy.pageobjects.ProductCatalogue;
 
 public class ErrorValidationsTest extends BaseTest {
 

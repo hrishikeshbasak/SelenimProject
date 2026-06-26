@@ -1,20 +1,20 @@
-package rahulshettyacademy.stepDefinitions;
+package org.stepDefinitions;
 
 import java.io.IOException;
 import java.util.List;
 
+import org.TestComponents.BaseTest;
 import org.openqa.selenium.WebElement;
+import org.pageobjects.CartPage;
+import org.pageobjects.CheckoutPage;
+import org.pageobjects.ConfirmationPage;
+import org.pageobjects.LandingPage;
+import org.pageobjects.ProductCatalogue;
 import org.testng.Assert;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import rahulshettyacademy.TestComponents.BaseTest;
-import rahulshettyacademy.pageobjects.CartPage;
-import rahulshettyacademy.pageobjects.CheckoutPage;
-import rahulshettyacademy.pageobjects.ConfirmationPage;
-import rahulshettyacademy.pageobjects.LandingPage;
-import rahulshettyacademy.pageobjects.ProductCatalogue;
 
 public class StepDefinitionImpl extends BaseTest{
 

@@ -1,11 +1,10 @@
-package rahulshettyacademy.pageobjects;
+package org.pageobjects;
 
+import org.AbstractComponents.AbstractComponent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
-import rahulshettyacademy.AbstractComponents.AbstractComponent;
 
 public class ConfirmationPage extends AbstractComponent{
 

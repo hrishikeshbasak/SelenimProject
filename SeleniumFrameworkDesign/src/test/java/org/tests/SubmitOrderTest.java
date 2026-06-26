@@ -1,4 +1,4 @@
-package rahulshettyacademy.tests;
+package org.tests;
 
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -6,14 +6,14 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
+import org.TestComponents.BaseTest;
 import org.openqa.selenium.WebElement;
+import org.pageobjects.CartPage;
+import org.pageobjects.CheckoutPage;
+import org.pageobjects.ConfirmationPage;
+import org.pageobjects.OrderPage;
+import org.pageobjects.ProductCatalogue;
 import org.testng.Assert;
-import rahulshettyacademy.TestComponents.BaseTest;
-import rahulshettyacademy.pageobjects.CartPage;
-import rahulshettyacademy.pageobjects.CheckoutPage;
-import rahulshettyacademy.pageobjects.ConfirmationPage;
-import rahulshettyacademy.pageobjects.OrderPage;
-import rahulshettyacademy.pageobjects.ProductCatalogue;
 
 public class SubmitOrderTest extends BaseTest {
 	String productName = "ZARA COAT 3";

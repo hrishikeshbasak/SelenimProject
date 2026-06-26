@@ -1,4 +1,4 @@
-package rahulshettyacademy.TestComponents;
+package org.TestComponents;
 
 import org.testng.annotations.AfterMethod;
 
@@ -22,14 +22,14 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.pageobjects.LandingPage;
+import org.resources.ExtentReporterNG;
 import org.testng.annotations.BeforeMethod;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import rahulshettyacademy.pageobjects.LandingPage;
-import rahulshettyacademy.resources.ExtentReporterNG;
 
 public class BaseTest {
 
