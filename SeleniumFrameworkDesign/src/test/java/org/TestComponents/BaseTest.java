@@ -74,7 +74,7 @@ public class BaseTest {
 			options.addArguments("--window-size=1440,900");
 			options.addArguments("--no-first-run");
 			options.addArguments("--no-default-browser-check");
-			options.addArguments("--user-data-dir=" + System.getProperty("user.dir") + "/target/chrome-user-data");
+			options.addArguments("--user-data-dir=" + System.getProperty("user.dir") + "/target/chrome-user-data-" + UUID.randomUUID().toString());
 			if (browserName.contains("headless")) {
 				logInfo("Running ChromeDriver in headless mode");
 				options.addArguments("--headless=new");
