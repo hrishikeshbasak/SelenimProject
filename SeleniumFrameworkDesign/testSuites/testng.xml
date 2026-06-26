@@ -5,20 +5,20 @@
 <suite name="Suite">
 
 	<listeners>
-		<listener class-name="rahulshettyacademy.TestComponents.Listeners" />
+		<listener class-name="org.TestComponents.Listeners" />
 	</listeners>
 
 
 	<test name="Submit Order Test">
 		<classes>
-			<class name="rahulshettyacademy.tests.SubmitOrderTest" />
+			<class name="org.tests.SubmitOrderTest" />
 		</classes>
 	</test> <!--
 	Test -->
 
 	<test name="Error Validations Test">
 		<classes>
-			<class name="rahulshettyacademy.tests.ErrorValidationsTest" />
+			<class name="org.tests.ErrorValidationsTest" />
 		</classes>
 	</test> <!--
 	Test -->
