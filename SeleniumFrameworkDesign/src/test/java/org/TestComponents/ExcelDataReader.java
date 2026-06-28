@@ -26,18 +26,25 @@ public class ExcelDataReader {
 				Iterator<Row> rows = sheet.iterator();
 				Row firstRow = rows.next();
 				Iterator<Cell> cell = firstRow.cellIterator();
-				cell.next();
 
 				int k = 0;
 				int column = 0;
 				while (cell.hasNext()) {
 					Cell cellValue = cell.next();
-					if (cellValue.getStringCellValue().equalsIgnoreCase("Data3")) {
+					if (cellValue.getStringCellValue().equalsIgnoreCase("data2")) {
 						column = k;
 					}
 					k++;
 				}
-				System.out.println(column);
+				while (rows.hasNext()) {
+					Row r = rows.next();
+					if (r.getCell(column).getStringCellValue().equalsIgnoreCase("Purchase")) {
+						Iterator<Cell> cv = r.cellIterator();
+						while (cv.hasNext()) {
+							System.out.println(cv.next().getStringCellValue());
+						}
+					}
+				}
 			}
 		}
 	}
