@@ -41,7 +41,7 @@ public class ExcelDataReader {
 						}
 						k++;
 					}
-					
+					// This is used to format the cell value to string, regardless of the cell type (numeric, string, etc.)
 					DataFormatter formatter = new DataFormatter();
 					while (rows.hasNext()) {
 						Row r = rows.next();
