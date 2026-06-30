@@ -2,6 +2,7 @@ package org.TestComponents;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
 
 import org.apache.poi.ss.usermodel.Cell;
@@ -11,7 +12,8 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class ExcelDataReader {
 
-	public static void main(String[] args) throws IOException {
+	public ArrayList<String> getData(String testcases) throws IOException {
+		ArrayList<String> list = new ArrayList<String>();
 
 		FileInputStream fis = new FileInputStream(
 				System.getProperty("user.dir") + "//src//main//java//org//resources//TestData.xlsx");
@@ -31,22 +33,25 @@ public class ExcelDataReader {
 				int column = 0;
 				while (cell.hasNext()) {
 					Cell cellValue = cell.next();
-					if (cellValue.getStringCellValue().equalsIgnoreCase("data2")) {
+					if (cellValue.getStringCellValue().equalsIgnoreCase("TestCases")) {
 						column = k;
 					}
 					k++;
 				}
 				while (rows.hasNext()) {
 					Row r = rows.next();
-					if (r.getCell(column).getStringCellValue().equalsIgnoreCase("Purchase")) {
+					if (r.getCell(column).getStringCellValue().equalsIgnoreCase(testcases)) {
 						Iterator<Cell> cv = r.cellIterator();
 						while (cv.hasNext()) {
-							System.out.println(cv.next().getStringCellValue());
+							list.add(cv.next().getStringCellValue());
 						}
+						break;
 					}
 				}
 			}
 		}
+		workbook.close();
+		fis.close();
+		return list;
 	}
-
 }
